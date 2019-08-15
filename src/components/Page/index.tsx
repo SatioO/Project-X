@@ -29,23 +29,22 @@ const PageX: React.FC<Props> = (props: Props) => {
         offsetY: 0,
     });
 
-    function mouseDown(e: MouseEvent) {
-        setState(state => ({
-            ...state,
+    const mouseDown = useCallback((e: MouseEvent) => {
+        setState(_ => ({
             drag: true,
             startX: e.offsetX,
             startY: e.offsetY,
             offsetX: 0,
             offsetY: 0,
         }));
-    }
+    }, []);
 
-    function mouseUp(e: MouseEvent) {
+    const mouseUp = useCallback(() => {
         setState(state => ({
             ...state,
             drag: false,
         }));
-    }
+    }, []);
 
     const mouseMove = useCallback(
         (e: MouseEvent) => {
@@ -76,7 +75,7 @@ const PageX: React.FC<Props> = (props: Props) => {
                 page.removeEventListener('mousemove', mouseMove, false);
             }
         };
-    }, [props.data.id, mouseMove]);
+    }, [props.data.id, mouseMove, mouseUp, mouseDown]);
 
     return (
         <div
@@ -95,7 +94,8 @@ const PageX: React.FC<Props> = (props: Props) => {
                 <Placeholder
                     className="page_placeholder"
                     width={
-                        props.data.geometric_bound[3] * props.spread.pages.size // NOTE: Sets the placeholder span limit
+                        // NOTE: Sets the placeholder span limit
+                        props.data.geometric_bound[3] * props.spread.pages.size
                     }
                     height={props.data.geometric_bound[2]}
                     {...state}
