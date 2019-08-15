@@ -63,9 +63,9 @@ const PageX: React.FC<Props> = (props: Props) => {
         const page = document.getElementById(`page_${props.data.id}`);
 
         if (!!page) {
+            page.addEventListener('mousemove', mouseMove, false);
             page.addEventListener('mousedown', mouseDown, false);
             page.addEventListener('mouseup', mouseUp, false);
-            page.addEventListener('mousemove', mouseMove, false);
         }
 
         return () => {

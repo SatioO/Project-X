@@ -2,16 +2,14 @@ import './styles.css';
 import React from 'react';
 import { Page } from '../../types/metadata';
 
-const dpi = window.devicePixelRatio;
-
 interface Props {
     data: Page;
 }
 
 const PageBorderX: React.FC<Props> = (props: Props) => (
     <svg
-        height={`${props.data.geometric_bound[2] * dpi}px`}
-        width={`${props.data.geometric_bound[3] * dpi}px`}
+        height={`${props.data.geometric_bound[2]}px`}
+        width={`${props.data.geometric_bound[3]}px`}
         style={{ position: 'absolute' }}
     >
         <defs>
