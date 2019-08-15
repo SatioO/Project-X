@@ -29,7 +29,7 @@ const PageX: React.FC<Props> = (props: Props) => {
         offsetY: 0,
     });
 
-    const mouseDown = useCallback((e: MouseEvent) => {
+    const mouseDown = (e: MouseEvent) => {
         setState(_ => ({
             drag: true,
             startX: e.offsetX,
@@ -37,14 +37,14 @@ const PageX: React.FC<Props> = (props: Props) => {
             offsetX: 0,
             offsetY: 0,
         }));
-    }, []);
+    };
 
-    const mouseUp = useCallback(() => {
+    const mouseUp = () => {
         setState(state => ({
             ...state,
             drag: false,
         }));
-    }, []);
+    };
 
     const mouseMove = useCallback(
         (e: MouseEvent) => {
@@ -75,7 +75,7 @@ const PageX: React.FC<Props> = (props: Props) => {
                 page.removeEventListener('mousemove', mouseMove, false);
             }
         };
-    }, [props.data.id, mouseMove, mouseUp, mouseDown]);
+    }, [props.data.id, mouseMove]);
 
     return (
         <div
@@ -107,4 +107,4 @@ const PageX: React.FC<Props> = (props: Props) => {
     );
 };
 
-export default React.memo(PageX);
+export default PageX;
